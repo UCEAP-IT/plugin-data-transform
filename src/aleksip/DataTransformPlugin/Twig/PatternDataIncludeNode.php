@@ -2,11 +2,13 @@
 
 namespace aleksip\DataTransformPlugin\Twig;
 
-class PatternDataIncludeNode extends \Twig_Node_Include
+use Twig\Node\IncludeNode as Twig_Node_Include;
+
+class PatternDataIncludeNode extends Twig_Node_Include
 {
     use PatternDataNodeTrait;
 
-    public function __construct(\Twig_Node_Include $originalNode, $data)
+    public function __construct(Twig_Node_Include $originalNode, $data)
     {
         $variables = $originalNode->hasNode('variables')
             ? $originalNode->getNode('variables')

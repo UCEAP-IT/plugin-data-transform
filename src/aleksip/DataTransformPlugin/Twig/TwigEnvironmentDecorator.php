@@ -3,6 +3,7 @@
 namespace aleksip\DataTransformPlugin\Twig;
 
 use aleksip\DataTransformPlugin\ErrorHandlerTrait;
+use Twig\Environment as Twig_Environment;
 
 class TwigEnvironmentDecorator
 {
@@ -12,7 +13,7 @@ class TwigEnvironmentDecorator
     protected $errno;
     protected $errstr;
 
-    public function __construct(\Twig_Environment $environment)
+    public function __construct(Twig_Environment $environment)
     {
         $this->environment = $environment;
     }

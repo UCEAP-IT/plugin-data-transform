@@ -1,6 +1,7 @@
 <?php
 
 namespace aleksip\DataTransformPlugin\Twig;
+use Twig\Compiler as Twig_Compiler;
 
 trait PatternDataNodeTrait
 {
@@ -49,7 +50,7 @@ trait PatternDataNodeTrait
         return sprintf('"%s"', addcslashes($value, "\0\t\"\$\\"));
     }
 
-    protected function addTemplateArguments(\Twig_Compiler $compiler)
+    protected function addTemplateArguments(Twig_Compiler $compiler)
     {
         $variables = $this->hasNode('variables')
             ? $this->getNode('variables')

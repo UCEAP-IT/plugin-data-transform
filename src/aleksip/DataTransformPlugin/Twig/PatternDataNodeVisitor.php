@@ -3,8 +3,13 @@
 namespace aleksip\DataTransformPlugin\Twig;
 
 use aleksip\DataTransformPlugin\DataTransformer;
+use Twig\Node\IncludeNode as Twig_Node_Include;
+use Twig\Node\EmbedNode as Twig_Node_Embed;
+use Twig\NodeVisitor\AbstractNodeVisitor as Twig_BaseNodeVisitor;
+use Twig\Environment as Twig_Environment;
+use Twig\Node\Node as Twig_Node;
 
-class PatternDataNodeVisitor extends \Twig_BaseNodeVisitor
+class PatternDataNodeVisitor extends Twig_BaseNodeVisitor
 {
     /**
      * @var DataTransformer
@@ -16,14 +21,14 @@ class PatternDataNodeVisitor extends \Twig_BaseNodeVisitor
         $this->dataTransformer = $dataTransformer;
     }
 
-    protected function doEnterNode(\Twig_Node $node, \Twig_Environment $env)
+    protected function doEnterNode(Twig_Node $node, Twig_Environment $env)
     {
         return $node;
     }
 
-    protected function doLeaveNode(\Twig_Node $node, \Twig_Environment $env)
+    protected function doLeaveNode(Twig_Node $node, Twig_Environment $env)
     {
-        if ($node instanceof \Twig_Node_Include) {
+        if ($node instanceof Twig_Node_Include) {
             if ($node->hasNode('expr') && $node->getNode('expr')->hasAttribute('value')) {
                 $patternStoreKey = $node->getNode('expr')->getAttribute('value');
 
@@ -48,7 +53,7 @@ class PatternDataNodeVisitor extends \Twig_BaseNodeVisitor
                 }
 
                 $data = $this->dataTransformer->getProcessedPatternSpecificData($patternStoreKey);
-                if ($node instanceof \Twig_Node_Embed) {
+                if ($node instanceof Twig_Node_Embed) {
                     $dataNode = new PatternDataEmbedNode($node, $data);
                 }
                 else {

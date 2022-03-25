@@ -3,6 +3,7 @@
 namespace aleksip\DataTransformPlugin;
 
 use aleksip\DataTransformPlugin\Twig\TwigEnvironmentDecorator;
+use Twig\Environment as Twig_Environment;
 
 /**
  * @author Aleksi Peebles <aleksi@iki.fi>
@@ -18,7 +19,7 @@ class Renderer
 
     public function render($pattern, $data = array())
     {
-        if ($this->renderer instanceof \Twig_Environment || $this->renderer instanceof TwigEnvironmentDecorator) {
+        if ($this->renderer instanceof Twig_Environment || $this->renderer instanceof TwigEnvironmentDecorator) {
             return $this->renderer->render($pattern, $data);
         }
         else {

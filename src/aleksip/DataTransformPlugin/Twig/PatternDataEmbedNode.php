@@ -2,11 +2,13 @@
 
 namespace aleksip\DataTransformPlugin\Twig;
 
-class PatternDataEmbedNode extends \Twig_Node_Embed
+use Twig\Node\EmbedNode as Twig_Node_Embed;
+
+class PatternDataEmbedNode extends Twig_Node_Embed
 {
     use PatternDataNodeTrait;
 
-    public function __construct(\Twig_Node_Embed $originalNode, $data)
+    public function __construct(Twig_Node_Embed $originalNode, $data)
     {
         $variables = $originalNode->hasNode('variables')
             ? $originalNode->getNode('variables')
